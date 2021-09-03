@@ -43,6 +43,7 @@ env:
     - BUILD_PLATFORM="bsom electron"
     - BUILD_PLATFORM="b5som photon"
     - BUILD_PLATFORM="tracker newhal"
+    - BUILD_PLATFOMR="xenon"
 
   # matrix:
   # - UNIT_TEST=y

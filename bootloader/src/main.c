@@ -470,7 +470,7 @@ int main(void)
             uint32_t stack = *(volatile uint32_t*)ApplicationAddress;
             jump_to_system(addr, stack);
         }
-#if !HAL_PLATFORM_NRF52840
+#if !HAL_PLATFORM_MESH
         else
         {
             LED_SetRGBColor(RGB_COLOR_RED);

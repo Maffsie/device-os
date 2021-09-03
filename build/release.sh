@@ -8,8 +8,8 @@ function display_help ()
     echo '
 usage: release.sh [--output-directory=<binary_output_directory>]
                   (--platform=<argon|asom|boron|bsom...
-                  |b5som|electron|p1|photon>...
-                  | --platform-id=<6|8|10|12|13|22|23|25|26>)
+                  |b5som|electron|p1|photon|xenon>...
+                  | --platform-id=<6|8|10|12|13|14|22|23|25|26>)
                   [--debug] [--help] [--tests]
 
 Generate the binaries for a versioned release of the Device OS. This utility
@@ -213,38 +213,52 @@ elif [ ! -z $PLATFORM ]; then
         "photon")
             PLATFORM_ID="6"
             GEN3=false
+            MESH=$GEN3
             ;;
         "p1")
             PLATFORM_ID="8"
             GEN3=false
+            MESH=$GEN3
             ;;
         "electron")
             PLATFORM_ID="10"
             GEN3=false
+            MESH=$GEN3
             ;;
         "argon")
             PLATFORM_ID="12"
             GEN3=true
+            MESH=$GEN3
             ;;
         "boron")
             PLATFORM_ID="13"
             GEN3=true
+            MESH=$GEN3
+            ;;
+        "xenon")
+            PLATFORM_ID="14"
+            GEN3=true
+            MESH=$GEN3
             ;;
         "asom")
             PLATFORM_ID="22"
             GEN3=true
+            MESH=$GEN3
             ;;
         "bsom")
             PLATFORM_ID="23"
             GEN3=true
+            MESH=$GEN3
             ;;
         "b5som")
             PLATFORM_ID="25"
             GEN3=true
+            MESH=$GEN3
             ;;
         "tracker")
             PLATFORM_ID="26"
             GEN3=true
+            MESH=$GEN3
             ;;
         *)
             echo "ERROR: No rules to release platform: \"$PLATFORM\"!"
@@ -256,38 +270,52 @@ else
         6)
             PLATFORM="photon"
             GEN3=false
+            MESH=$GEN3
             ;;
         8)
             PLATFORM="p1"
             GEN3=false
+            MESH=$GEN3
             ;;
         10)
             PLATFORM="electron"
             GEN3=false
+            MESH=$GEN3
             ;;
         12)
             PLATFORM="argon"
             GEN3=true
+            MESH=$GEN3
             ;;
         13)
             PLATFORM="boron"
             GEN3=true
+            MESH=$GEN3
+            ;;
+        14)
+            PLATFORM="xenon"
+            GEN3=true
+            MESH=$GEN3
             ;;
         22)
             PLATFORM="asom"
             GEN3=true
+            MESH=$GEN3
             ;;
         23)
             PLATFORM="bsom"
             GEN3=true
+            MESH=$GEN3
             ;;
         25)
             PLATFORM="b5som"
             GEN3=true
+            MESH=$GEN3
             ;;
         26)
             PLATFORM="tracker"
             GEN3=true
+            MESH=$GEN3
             ;;
         *)
             echo "ERROR: No rules to release platform id: $PLATFORM_ID!"
@@ -386,8 +414,8 @@ elif [ $PLATFORM_ID -eq 10 ]; then
         release_binary "user-part" "tinker" "-m" "$DEBUG_BUILD" "$USE_SWD_JTAG"
     done
 
-# GEN3
-elif [ $PLATFORM_ID -eq 12 ] || [ $PLATFORM_ID -eq 13 ] || [ $PLATFORM_ID -eq 22 ] || [ $PLATFORM_ID -eq 23 ] || [ $PLATFORM_ID -eq 25 ] || [ $PLATFORM_ID -eq 26 ]; then
+# GEN3 / Mesh
+elif [ $PLATFORM_ID -eq 12 ] || [ $PLATFORM_ID -eq 13 ] || [ $PLATFORM_ID -eq 14 ] || [ $PLATFORM_ID -eq 22 ] || [ $PLATFORM_ID -eq 23 ] || [ $PLATFORM_ID -eq 25 ] || [ $PLATFORM_ID -eq 26 ]; then
     # Configure
     if [ $DEBUG = true ]; then
         cd ../main
